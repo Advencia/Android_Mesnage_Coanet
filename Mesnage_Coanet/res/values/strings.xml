@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mesnage_Coanet</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	<string name="name">Name of your make up</string>
+	<string name="date">End of product life</string>
+	<string name="add_product">Save</string>
+</resources>
