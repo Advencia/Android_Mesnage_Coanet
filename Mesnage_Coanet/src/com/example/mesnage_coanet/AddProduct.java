@@ -30,8 +30,8 @@ public class AddProduct extends Activity implements OnClickListener {
 	    protected void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);       
 	        setContentView(R.layout.add_product);
-	        name = (EditText) findViewById(R.id.name);
-	        date = (EditText) findViewById(R.id.date);
+	        name = (EditText) findViewById(R.id.edit_name);
+	        date = (EditText) findViewById(R.id.edit_date);
 	        btn = (Button) findViewById(R.id.add_product_button);
 	        
 	        btn.setOnClickListener((android.view.View.OnClickListener) this);
@@ -41,27 +41,26 @@ public class AddProduct extends Activity implements OnClickListener {
 	    public void onClick(View view) {
 	        switch(view.getId()){
 	            case R.id.add_product_button:
-	            	//if(!=validate()){         
+	            	//if(!validate()){         
 	            		Product product = new Product();
-	            		name = (EditText) findViewById(R.id.name);
-	            		String nom = name.getText().toString();
-	            		product.setName(nom);	            
+	            		product.setName(name.getText().toString());	            
 	            		product.setDate(date.getText().toString());
 	                	new HttpAsyncTask().execute(product);
+	                	Log.d("var2","post");
 	            	//}
 	            break;
 	        }	 
 	    }
 	    
 	    /******fct utilisé pour verifier que les champs sont nn vides dans onClick*******/
-	   /* private boolean validate(){
+	    private boolean validate(){
 	        if(name.getText().toString().trim().equals(""))
 	            return false;
 	        else if(date.getText().toString().trim().equals(""))
 	            return false;
 	        else
 	            return true;    
-	    }*/
+	    }
 	       
 	    /*********fonction d'envoi des données en json au serveur************/
 	    public static String POST(String url, Product product){
@@ -69,7 +68,7 @@ public class AddProduct extends Activity implements OnClickListener {
 	        String result = "";
 	        try {
 	            HttpClient httpclient = new DefaultHttpClient();
-	 
+	 Log.d("var","post");
 	            HttpPost httpPost = new HttpPost(url);
 	 
 	            String json = "";
@@ -119,7 +118,7 @@ public class AddProduct extends Activity implements OnClickListener {
 	        
 	        //fct d'affichage du resultat qui ici ne fait que confirmer l'envoi
 	        @Override
-	        protected void onPostExecute(String result) {
+	        protected void onPostExecute(String result) {Log.d("var3","post");
 	            Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
 	       }
 	    }

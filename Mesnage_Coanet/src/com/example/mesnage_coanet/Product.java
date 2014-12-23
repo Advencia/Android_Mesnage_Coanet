@@ -4,7 +4,7 @@ public class Product {
 	 private String name;
 	 private String date;
 	 public static String url= "https://mysterious-journey-1753.herokuapp.com/products.json";
-	
+	 public static String url2= "https://mysterious-journey-1753.herokuapp.com/products";
 	 public void setName(String name) {
 	  this.name = name;
 	 }
