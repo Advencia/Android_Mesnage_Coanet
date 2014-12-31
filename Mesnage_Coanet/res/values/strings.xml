@@ -7,4 +7,5 @@
 	<string name="name">Name of your make up</string>
 	<string name="date">End of product life</string>
 	<string name="add_product">Save</string>
+	<string name="search">Search</string>
 </resources>

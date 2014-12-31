@@ -1,6 +1,8 @@
 package com.example.mesnage_coanet;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 public class ProductAdapter extends ArrayAdapter<Product> {
 	private List<Product> items;
+	private ArrayList<Product> list_filtre;
 	
 	/*associe le modele d'un item à l'adapter*/
 	public ProductAdapter(Context context, List<Product> items) {
@@ -28,7 +31,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 	
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
-		//v.setOnLongClickListener();
+		
 		if (v == null) {
 			LayoutInflater li = LayoutInflater.from(getContext());
 			v = li.inflate(R.layout.app_custom_list, null);
@@ -51,5 +54,22 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		}
 		return v;
 	}
+	
+	public void filter(String charText) {
+		charText = charText.toLowerCase(Locale.getDefault());
+		//items.clear();
+		List<Product> list_filtre = new ArrayList<Product>();
+			if (charText.length() == 0) {
+				list_filtre.addAll(items);
+			}
+			else {
+				for (Product product : items) {
+					if (product.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
+						list_filtre.add(product);
+					}
+				}
+			}		
+			notifyDataSetChanged();
+		}
 	
 }

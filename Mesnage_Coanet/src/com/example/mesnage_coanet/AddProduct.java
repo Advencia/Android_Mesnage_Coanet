@@ -134,5 +134,4 @@ public class AddProduct extends Activity implements OnClickListener {
 	        inputStream.close();
 	        return result;	 
 	    }
-
 }
