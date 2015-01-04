@@ -27,23 +27,5 @@ public class TabView extends TabActivity {
                 .setContent(new Intent(this, AddProduct.class)));       
     }
     
-    /**********Menu Action Bar***********/
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-    	switch (item.getItemId()) {
-    		case R.id.search:
-    		
-    			return true;
-    		default:
-    			return super.onOptionsItemSelected(item);
-    	}
-    }
+ 
 }
