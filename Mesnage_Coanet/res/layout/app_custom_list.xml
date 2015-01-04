@@ -7,18 +7,24 @@
     android:layout_marginLeft="20dp"
     android:onClick="onClickDoSomething">
  
-
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       />
+       	android:textSize="15sp"
+       	android:layout_marginBottom="10dp"
+       	android:layout_marginTop="5dp"
+       	android:layout_marginLeft="10dp"
+       	android:textColor="@color/textColor"/>
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-         />  
+        android:textSize="15sp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/textColor"/>  
 
  
 </LinearLayout>

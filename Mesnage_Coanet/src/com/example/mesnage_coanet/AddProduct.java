@@ -3,12 +3,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -47,6 +52,7 @@ public class AddProduct extends Activity implements OnClickListener {
 	            		product.setDate(date.getText().toString());
 	                	new HttpAsyncTask().execute(product);
 	                	Log.d("var2","post");
+	                	
 	            	//}
 	            break;
 	        }	 
@@ -68,11 +74,9 @@ public class AddProduct extends Activity implements OnClickListener {
 	        String result = "";
 	        try {
 	            HttpClient httpclient = new DefaultHttpClient();
-	 Log.d("var","post");
+	            Log.d("var","post");
 	            HttpPost httpPost = new HttpPost(url);
-	 
-	            String json = "";
-	 
+	            String json;
 	            // objet Json
 	            JSONObject jsonObject = new JSONObject();
 	            jsonObject.accumulate("name", product.getName());
@@ -83,20 +87,23 @@ public class AddProduct extends Activity implements OnClickListener {
 	            // passer json en StringEntity
 	            StringEntity se = new StringEntity(json);
 	 
-	            // httpPost Entity
 	            httpPost.setEntity(se);
 	 
 	            // met des titre headers pour informer le server du type de contenu 
-	          //  httpPost.setHeader("Accept", "application/json");
-	          //  httpPost.setHeader("Content-type", "application/json");
+	            httpPost.setHeader("Accept", "application/json");
+	            httpPost.setHeader("Content-type", "application/json");
+	          /*List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+	 	       	nameValuePairs.add(new BasicNameValuePair("name", "anti-ride"));
+	 	       	nameValuePairs.add(new BasicNameValuePair("date", "2015-06-08"));
+	 	       	httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs)); */
 	 
 	            // Execute requete post
 	            HttpResponse httpResponse = httpclient.execute(httpPost);
 	 
 	            // recoit la reponse comme inputstream
 	            inputStream = httpResponse.getEntity().getContent();
-	 
-	            // convertit inputstream to string
+	            Log.d("var","post");
+	            // convertit inputstream en string
 	            if(inputStream != null)
 	                result = convertInputStreamToString(inputStream);
 	            else
@@ -119,7 +126,7 @@ public class AddProduct extends Activity implements OnClickListener {
 	        //fct d'affichage du resultat qui ici ne fait que confirmer l'envoi
 	        @Override
 	        protected void onPostExecute(String result) {Log.d("var3","post");
-	            Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
+	            Toast.makeText(getBaseContext(), "Product save", Toast.LENGTH_LONG).show();
 	       }
 	    }
 	    

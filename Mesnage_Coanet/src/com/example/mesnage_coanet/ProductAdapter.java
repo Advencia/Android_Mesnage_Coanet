@@ -5,30 +5,31 @@ import java.util.List;
 import java.util.Locale;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
-public class ProductAdapter extends ArrayAdapter<Product> {
-	private List<Product> items;
-	private ArrayList<Product> list_filtre;
+public class ProductAdapter extends ArrayAdapter<Product> implements Filterable{
 	
-	/*associe le modele d'un item à l'adapter*/
+	private List<Product> items;
+	
+	/****associe le modele d'un item à l'adapter****/
 	public ProductAdapter(Context context, List<Product> items) {
 		super(context, R.layout.app_custom_list, items);
 		this.items = items;		
 	}
 
-	/*recupere le nombre d'item*/
+	/****recupere le nombre d'item****/
 	@Override
 	public int getCount() {
 		return items.size();
 	}
 
-	/*recuperation des donnees*/
-	
+	/****recuperation des donnees*****/
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
 		
@@ -55,21 +56,30 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 		return v;
 	}
 	
+	/**********fonction de filtre appelée dans le main************/
 	public void filter(String charText) {
 		charText = charText.toLowerCase(Locale.getDefault());
 		//items.clear();
+		
+		//on créé une nouvelle liste
 		List<Product> list_filtre = new ArrayList<Product>();
-			if (charText.length() == 0) {
+		
+		//si aucun caractere nest tapé par l'utilisateur pour une recherche, on renvoi la liste initiale
+		if (charText.length() == 0) {
 				list_filtre.addAll(items);
-			}
-			else {
-				for (Product product : items) {
-					if (product.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
-						list_filtre.add(product);
-					}
+				Log.d("fil2", "test");
+		}
+			
+			//sinon on renvoi une nouvelle liste implémentée avec les items dont le nom contient les caractères tapés dans le edittext
+		else {
+			for (Product product : items) {
+				if (product.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
+					list_filtre.add(product);
+					Log.d("fil3", "test");
 				}
-			}		
-			notifyDataSetChanged();
+			}
+		}		
+		notifyDataSetChanged();
 		}
 	
 }

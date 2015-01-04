@@ -8,4 +8,6 @@
 	<string name="date">End of product life</string>
 	<string name="add_product">Save</string>
 	<string name="search">Search</string>
+	<string name="form_product">Add Product</string>
+	<string name="list_product">Products</string>
 </resources>

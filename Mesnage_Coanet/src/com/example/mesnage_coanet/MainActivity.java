@@ -3,6 +3,7 @@ package com.example.mesnage_coanet;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,6 +13,8 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,7 +33,7 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	        setContentView(R.layout.main);       
 	        initView();
 	      
-	      /*********Fonction de Refresh **********/
+	      /*********Fonction de Reload des données **********/
 	       final SwipeRefreshLayout swipeContain = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 	        swipeContain.setOnRefreshListener(new OnRefreshListener() {
 	            @Override
@@ -39,7 +42,7 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	                swipeContain.setRefreshing(false);
 	            } 
 	        });
-	        // Configure the refreshing colors
+	        // Configure les couleurs
 	       swipeContain.setColorSchemeResources(android.R.color.holo_blue_bright, 
 	                android.R.color.holo_purple, 
 	                android.R.color.holo_blue_light, 
@@ -53,6 +56,7 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	    		   String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
 	    		   ProductAdapter adapter = new ProductAdapter(context, list_products);
 	    		   adapter.filter(text);
+	    		   Log.d("fil1", "test");
 	    		   adapter.notifyDataSetChanged();
 	    	   }
 	     
@@ -67,40 +71,38 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	    	   }
 	       });
 	    }
-	    	    
-	    /*********************/
+	    	
+	   
+	    /**********initialise la connexion***********/
 	    private void initView() {
 	        // show progress dialog
 	        dialog = ProgressDialog.show(this, "", "Loading...");	         
 	        String url = "https://mysterious-journey-1753.herokuapp.com/products.json";
-	        //String url2 = "https://remindmymakeup.herokuapp.com/users/1";
+	       // String url2 = "https://remindmymakeup.herokuapp.com/users/1.json";
 	        FetchDataTask task = new FetchDataTask(this);
 	        task.execute(url);	        
 	    }
 	    
+	    /**********************/
 	    private void refreshView() {
 	    	 String url = "https://mysterious-journey-1753.herokuapp.com/products.json";
 		     FetchDataTask task = new FetchDataTask(this);
 		     task.execute(url);
 	    }
 	    
+	    /********************/
 	    @Override
 	    public void onFetchComplete(List<Product> data) {
-	        // dismiss the progress dialog
 	        if(dialog != null)  dialog.dismiss();
-	        // create new adapter
 	        ProductAdapter adapter = new ProductAdapter(this, data);
-	        // set the adapter to list
+	        // remplit la liste selon l'adapter 
 	        setListAdapter(adapter); 
 	        list_products = data;	        
 	    }
 	 
 	    @Override
 	    public void onFetchFailure(String msg) {
-	        // dismiss the progress dialog
 	        if(dialog != null)  dialog.dismiss();
-	        // show failure message
 	        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();       
-	    }
-	     
+	    }	     
 }
