@@ -1,3 +1,7 @@
 <resources>
     <color name="textColor">#fd6c9e</color>
+    <color name="rose_1">#e7807b</color>
+    <color name="rose_2">#e59890</color>
+    <color name="gris_1">#777777</color>
+    <color name="gris_2">#999999</color>
 </resources>

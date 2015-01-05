@@ -70,21 +70,23 @@ public class FetchDataTask extends AsyncTask<String, Void, String> {
         }       
          
         try {
+        	List<Product> app = new ArrayList<Product>();
             // on récupère ici dans un tableau json l'object (la table) products qui contient les produits dans un tableau
             JSONObject aJson = new JSONObject(sJson);
             JSONArray prodTab = aJson.getJSONArray(TAG_PRODUCT);
-            List<Product> app = new ArrayList<Product>();
-             
+            
             for(int i=0; i<prodTab.length(); i++) {
-                JSONObject json = prodTab.getJSONObject(i);
-                Product prod = new Product();
-                prod.setName(json.getString("name"));
+            	JSONObject json = prodTab.getJSONObject(i);
+            	Product prod = new Product();
+            	prod.setUser(aJson.getString("name"));
+                prod.setName(json.getString("name_product"));
                 prod.setDate(json.getString("date"));
-                
                 app.add(prod);                
             }
              
-            if(listener != null) listener.onFetchComplete(app);
+            if(listener != null){
+            	listener.onFetchComplete(app);
+            }
            
         }  
         	catch (JSONException e) {

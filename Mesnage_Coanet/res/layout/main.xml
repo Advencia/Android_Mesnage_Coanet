@@ -2,11 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<!-- <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"> -->
+    android:layout_height="match_parent"
+    android:padding="30dip" >
 
  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -17,7 +14,10 @@
         android:id="@+id/filtre"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/search" >
+        android:hint="@string/search" 
+        android:padding="5dip"
+        android:textColor="@color/rose_2"
+        android:background="@drawable/textview_style">
         <requestFocus />
     </EditText>
  

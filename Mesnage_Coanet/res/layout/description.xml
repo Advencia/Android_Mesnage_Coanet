@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
     android:layout_marginLeft="20dp"
     android:padding="10dip">
-   <!-- android:onClick="onClickDoSomething" --> 
- 
- 	<TextView
-        android:id="@+id/user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       	android:textSize="15sp"
-        android:layout_marginTop="5dp"
-       	android:layout_marginLeft="10dp"
-       	android:textColor="@color/rose_1"/>
- 	
+    
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -25,15 +14,15 @@
         android:layout_marginTop="5dp"
        	android:layout_marginLeft="10dp"
        	android:textColor="@color/rose_1"/>
-
+    
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:textColor="@color/rose_1"/>  
-
- 
-</LinearLayout>
+       	android:textSize="15sp"
+        android:layout_marginTop="5dp"
+       	android:layout_marginLeft="10dp"
+       	android:textColor="@color/rose_1"/>
+    
+   
+    </LinearLayout>
