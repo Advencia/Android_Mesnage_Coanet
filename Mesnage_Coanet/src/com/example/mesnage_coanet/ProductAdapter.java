@@ -44,7 +44,6 @@ public class ProductAdapter extends ArrayAdapter<Product> implements Filterable{
 			TextView name = (TextView) v.findViewById(R.id.name);
 			TextView date = (TextView) v.findViewById(R.id.date);
 			
-
 			if (name != null) {
 				name.setText(app.getName());
 			}

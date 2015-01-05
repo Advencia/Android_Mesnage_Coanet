@@ -49,15 +49,16 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	                android.R.color.holo_blue_dark);	
 	       
 	     /******Fonction de filtre******/       
+	      adapter = new ProductAdapter(this, list_products);
 	      final EditText editsearch = (EditText) findViewById(R.id.filtre);
 	       editsearch.addTextChangedListener(new TextWatcher() {
 	    	   @Override
 	    	   public void afterTextChanged(Editable arg0) {
 	    		   String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
-	    		   ProductAdapter adapter = new ProductAdapter(context, list_products);
 	    		   adapter.filter(text);
 	    		   Log.d("fil1", "test");
 	    		   adapter.notifyDataSetChanged();
+	    		   
 	    	   }
 	     
 	    	   @Override
@@ -66,8 +67,11 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	    	   }
 	     
 	    	   @Override
-	    	   public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
+	    	   public void onTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
+	    		   String text = editsearch.getText().toString();
+	    		   MainActivity.this.adapter.getFilter().filter(text);
+	    		   Log.d("fil1", "test");
+	    		   adapter.notifyDataSetChanged();
 	    	   }
 	       });
 	    }
@@ -96,15 +100,15 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	    private void initView() {
 	        // show progress dialog
 	        dialog = ProgressDialog.show(this, "", "Loading...");	         
-	        String url = "https://mysterious-journey-1753.herokuapp.com/products.json";
-	       // String url2 = "https://remindmymakeup.herokuapp.com/users/1.json";
+	        //String url = "https://mysterious-journey-1753.herokuapp.com/products.json";
+	        String url2 = "https://remindmymakeup.herokuapp.com/users/1.json";
 	        FetchDataTask task = new FetchDataTask(this);
-	        task.execute(url);	        
+	        task.execute(url2);	        
 	    }
 	    
 	    /**********************/
 	    private void refreshView() {
-	    	 String url = "https://mysterious-journey-1753.herokuapp.com/products.json";
+	    	 String url = "https://remindmymakeup.herokuapp.com/users/1.json";
 		     FetchDataTask task = new FetchDataTask(this);
 		     task.execute(url);
 	    }

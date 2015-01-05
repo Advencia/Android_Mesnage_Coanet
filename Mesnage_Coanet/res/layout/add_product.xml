@@ -40,6 +40,13 @@
             android:layout_marginBottom="20dp"
             android:layout_marginRight="10dp"/>
 
+   <!-- <DatePicker
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:endYear="2100"
+            android:startYear="1900" /> -->     
+        
     </LinearLayout>
 
     <Button

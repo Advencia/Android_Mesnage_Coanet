@@ -19,6 +19,8 @@ import org.json.JSONObject;
 import android.os.AsyncTask;
 
 public class FetchDataTask extends AsyncTask<String, Void, String> {
+	
+	private static final String TAG_PRODUCT = "products";
 	private final FetchDataListener listener;
     private String msg;
      
@@ -68,23 +70,20 @@ public class FetchDataTask extends AsyncTask<String, Void, String> {
         }       
          
         try {
-            // convert json string to json array
-            JSONArray aJson = new JSONArray(sJson);
-            // create apps list
+            // on récupère ici dans un tableau json l'object (la table) products qui contient les produits dans un tableau
+            JSONObject aJson = new JSONObject(sJson);
+            JSONArray prodTab = aJson.getJSONArray(TAG_PRODUCT);
             List<Product> app = new ArrayList<Product>();
              
-            for(int i=0; i<aJson.length(); i++) {
-                JSONObject json = aJson.getJSONObject(i);
+            for(int i=0; i<prodTab.length(); i++) {
+                JSONObject json = prodTab.getJSONObject(i);
                 Product prod = new Product();
                 prod.setName(json.getString("name"));
                 prod.setDate(json.getString("date"));
                 
-                // add the app to apps list
-                app.add(prod);
-                
+                app.add(prod);                
             }
              
-            //notify the activity that fetch data has been complete
             if(listener != null) listener.onFetchComplete(app);
            
         }  

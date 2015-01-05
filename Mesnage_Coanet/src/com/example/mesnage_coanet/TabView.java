@@ -25,7 +25,6 @@ public class TabView extends TabActivity {
         tabHost.addTab(tabHost.newTabSpec("tab2")
                 .setIndicator("Add Product")
                 .setContent(new Intent(this, AddProduct.class)));       
-    }
-    
+    }    
  
 }
