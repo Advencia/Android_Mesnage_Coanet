@@ -2,10 +2,6 @@ package com.example.mesnage_coanet;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -15,8 +11,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -61,10 +55,6 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	       editsearch.addTextChangedListener(new TextWatcher() {
 	    	   @Override
 	    	   public void afterTextChanged(Editable arg0) {
-	    		   /*String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
-	    		   adapter.filter(text);
-	    		   Log.d("fil1", "test");
-	    		   adapter.notifyDataSetChanged();*/
 	    		   
 	    	   }
 	     
@@ -75,10 +65,6 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	     
 	    	   @Override
 	    	   public void onTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
-	    		   /*String text = editsearch.getText().toString();
-	    		   MainActivity.this.adapter.getFilter().filter(text);
-	    		   Log.d("fil1", "test");
-	    		   adapter.notifyDataSetChanged();*/
 	    		   int textlength = s.length();
 	               ArrayList<Product> tempArrayList = new ArrayList<Product>();
 	               for(Product c: list_products){
@@ -121,7 +107,8 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	        // show progress dialog
 	        dialog = ProgressDialog.show(this, "", "Loading...");	         	        
 	        String url = "https://remindmymakeup.herokuapp.com/users/1.json"; 
-	        
+	        FetchDataTask task = new FetchDataTask(this);
+	        task.execute(url);
 	      /*  if(isValidUrl(url,i)){
 	    	  FetchDataTask task = new FetchDataTask(this);
 	    	  task.execute("https://remindmymakeup.herokuapp.com/users/"+i+".json");
