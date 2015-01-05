@@ -82,35 +82,22 @@ public class AddProduct extends Activity implements OnClickListener {
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost("https://remindmymakeup.herokuapp.com/users/1.json");
 			String json = "";
-			JSONObject holder = new JSONObject();
-			JSONObject produit = new JSONObject(); 
 			
-			produit.put("name", name.getText().toString());
-			produit.put("date", date.getText().toString());
-			holder.put("products", produit);
-			Log.e("Event JSON", "Event JSON = "+ holder.toString());
 			// objet Json
-			//JSONObject jsonObject = new JSONObject();
-			
-			//jsonObject.put("id", 1);
-			//jsonObject.put("name", "Admin");
-			
-			/*JSONArray prodTab = new JSONArray();
+			JSONObject jsonObject = new JSONObject();
+			JSONArray prodTab = new JSONArray();
 			
 			JSONObject prod = new JSONObject();
 			prod.put("name", product.getName());
 			prod.put("date", product.getDate());
-			prod.put("user_id", "1");
-			
-			//prod.put("id", "7");
 			prodTab.put(prod);
 			jsonObject.put(TAG_PRODUCT, prodTab);
 			
-			Log.d("TRY", jsonObject.toString());*/
+			Log.d("TRY", jsonObject.toString());
 
 			/**********/
 			// conversion
-			//json = jsonObject.toString();
+			json = jsonObject.toString();
 
 			// passer json en StringEntity
 			StringEntity se = new StringEntity(json);

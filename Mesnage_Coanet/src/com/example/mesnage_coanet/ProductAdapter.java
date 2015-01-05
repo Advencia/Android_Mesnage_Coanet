@@ -41,9 +41,13 @@ public class ProductAdapter extends ArrayAdapter<Product> implements Filterable{
 		Product app = items.get(position);
 
 		if (app != null) {
+			TextView user = (TextView) v.findViewById(R.id.user);
 			TextView name = (TextView) v.findViewById(R.id.name);
 			TextView date = (TextView) v.findViewById(R.id.date);
 			
+			if(user != null){
+				user.setText(app.getUser());
+			}
 			if (name != null) {
 				name.setText(app.getName());
 			}
@@ -53,32 +57,5 @@ public class ProductAdapter extends ArrayAdapter<Product> implements Filterable{
 			}
 		}
 		return v;
-	}
-	
-	/**********fonction de filtre appelée dans le main************/
-	public void filter(String charText) {
-		charText = charText.toLowerCase(Locale.getDefault());
-		//items.clear();
-		
-		//on créé une nouvelle liste
-		List<Product> list_filtre = new ArrayList<Product>();
-		
-		//si aucun caractere nest tapé par l'utilisateur pour une recherche, on renvoi la liste initiale
-		if (charText.length() == 0) {
-				list_filtre.addAll(items);
-				Log.d("fil2", "test");
-		}
-			
-			//sinon on renvoi une nouvelle liste implémentée avec les items dont le nom contient les caractères tapés dans le edittext
-		else {
-			for (Product product : items) {
-				if (product.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
-					list_filtre.add(product);
-					Log.d("fil3", "test");
-				}
-			}
-		}		
-		notifyDataSetChanged();
-		}
-	
+	}	
 }

@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class FetchDataTask extends AsyncTask<String, Void, String> {
 	
@@ -32,18 +33,16 @@ public class FetchDataTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         if(params == null) return null;
          
-        // get url from params
+        // recupere l'url
         String url = params[0];  
              
             try {
-                // create http connection
+                // crée http connection
                 HttpClient client = new DefaultHttpClient();
                 HttpGet httpget = new HttpGet(url);
-                 
-                // connect
                 HttpResponse response = client.execute(httpget);
                  
-                // get response
+                // obtient response
                 HttpEntity entity = response.getEntity();
                  
                 if(entity == null) {
@@ -51,7 +50,7 @@ public class FetchDataTask extends AsyncTask<String, Void, String> {
                     return null;       
                 }
               
-                // get response content and convert it to json string
+                // obtient contenu de la response et convertit
                 InputStream is = entity.getContent();
                 return streamToString(is);
             }
@@ -81,7 +80,8 @@ public class FetchDataTask extends AsyncTask<String, Void, String> {
             	prod.setUser(aJson.getString("name"));
                 prod.setName(json.getString("name_product"));
                 prod.setDate(json.getString("date"));
-                app.add(prod);                
+                app.add(prod); 
+                Log.d("TRY", json.toString());
             }
              
             if(listener != null){

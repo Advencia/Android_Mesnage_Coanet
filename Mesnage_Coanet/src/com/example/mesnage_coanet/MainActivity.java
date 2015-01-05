@@ -1,7 +1,10 @@
 package com.example.mesnage_coanet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.ActionBar;
 import android.app.ListActivity;
@@ -13,9 +16,11 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends ListActivity implements FetchDataListener {
@@ -26,6 +31,7 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	FetchDataListener listener;
 	Product product;
 	Context context = this;
+	
 	
 	    @Override
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +54,17 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	                android.R.color.holo_blue_light, 
 	                android.R.color.holo_blue_dark);	
 	       
-	     /******Fonction de filtre******/       
+	     /*********Fonction de filtre***********/   
+	       final ListView lv = (ListView)findViewById(android.R.id.list);
 	      adapter = new ProductAdapter(this, list_products);
 	      final EditText editsearch = (EditText) findViewById(R.id.filtre);
 	       editsearch.addTextChangedListener(new TextWatcher() {
 	    	   @Override
 	    	   public void afterTextChanged(Editable arg0) {
-	    		   String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
+	    		   /*String text = editsearch.getText().toString().toLowerCase(Locale.getDefault());
 	    		   adapter.filter(text);
 	    		   Log.d("fil1", "test");
-	    		   adapter.notifyDataSetChanged();
+	    		   adapter.notifyDataSetChanged();*/
 	    		   
 	    	   }
 	     
@@ -68,10 +75,21 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	     
 	    	   @Override
 	    	   public void onTextChanged(CharSequence s, int arg1, int arg2, int arg3) {
-	    		   String text = editsearch.getText().toString();
+	    		   /*String text = editsearch.getText().toString();
 	    		   MainActivity.this.adapter.getFilter().filter(text);
 	    		   Log.d("fil1", "test");
-	    		   adapter.notifyDataSetChanged();
+	    		   adapter.notifyDataSetChanged();*/
+	    		   int textlength = s.length();
+	               ArrayList<Product> tempArrayList = new ArrayList<Product>();
+	               for(Product c: list_products){
+	                  if (textlength <= c.getName().length()) {
+	                     if (c.getUser().toLowerCase().contains(s.toString().toLowerCase()) || c.getName().toLowerCase().contains(s.toString().toLowerCase())) {
+	                        tempArrayList.add(c);
+	                     }
+	                  }
+	               }
+	               adapter = new ProductAdapter(context, tempArrayList);
+	               lv.setAdapter(adapter);
 	    	   }
 	       });
 	    }
@@ -96,16 +114,32 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	    			return super.onOptionsItemSelected(item);
 	    	}
 	    }
+	    
 	    /**********initialise la connexion***********/
 	    private void initView() {
+	    	int i = 1;
 	        // show progress dialog
-	        dialog = ProgressDialog.show(this, "", "Loading...");	         
-	        //String url = "https://mysterious-journey-1753.herokuapp.com/products.json";
-	        String url2 = "https://remindmymakeup.herokuapp.com/users/1.json";
-	        FetchDataTask task = new FetchDataTask(this);
-	        task.execute(url2);	        
-	    }
+	        dialog = ProgressDialog.show(this, "", "Loading...");	         	        
+	        String url = "https://remindmymakeup.herokuapp.com/users/1.json"; 
+	        
+	      /*  if(isValidUrl(url,i)){
+	    	  FetchDataTask task = new FetchDataTask(this);
+	    	  task.execute("https://remindmymakeup.herokuapp.com/users/"+i+".json");
+	    	  //i = i+1;
+	    	  isValidUrl("https://remindmymakeup.herokuapp.com/users/"+(i+1)+".json", i);*/	    	  
+	      }       
 	    
+	    
+	   /* private boolean isValidUrl(String url, int i) {
+	    	 Pattern p = Patterns.WEB_URL;
+		        Matcher m = p.matcher("https://remindmymakeup.herokuapp.com/users/"+i+".json");
+	    	 if(m.matches()){
+		        	return true;
+		        }
+	    	 else {
+	    		 return false;
+	    	 }
+	    }*/
 	    /**********************/
 	    private void refreshView() {
 	    	 String url = "https://remindmymakeup.herokuapp.com/users/1.json";

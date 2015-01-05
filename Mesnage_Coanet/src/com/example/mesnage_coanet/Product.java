@@ -7,13 +7,6 @@ public class Product {
 	 public static String url= "https://mysterious-journey-1753.herokuapp.com/products.json";
 	 public static String url2= "https://mysterious-journey-1753.herokuapp.com/products";
 	 
-	 public void setUser(String user){
-		 this.user = user;
-	 }
-	 public String getUser() {
-		 return user;
-	 }
-	 
 	 public void setName(String name) {
 	  this.name = name;
 	 }
@@ -29,4 +22,12 @@ public class Product {
 	 public String getDate() {
 	  return date;
 	 }
+	 
+	 public void setUser(String user){
+		 this.user = user;
+	 }
+	 public String getUser() {
+		 return user;
+	 }
 }
+
