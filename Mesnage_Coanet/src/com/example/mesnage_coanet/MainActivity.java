@@ -109,6 +109,8 @@ public class MainActivity extends ListActivity implements FetchDataListener {
 	        String url = "https://remindmymakeup.herokuapp.com/users/1.json"; 
 	        FetchDataTask task = new FetchDataTask(this);
 	        task.execute(url);
+	        //nous avons voulu créer une fonction permettant de recuperer tout les liens, 
+	        //ainsi on recuperait sur le telephone les produits de chaque user
 	      /*  if(isValidUrl(url,i)){
 	    	  FetchDataTask task = new FetchDataTask(this);
 	    	  task.execute("https://remindmymakeup.herokuapp.com/users/"+i+".json");
